@@ -1,11 +1,23 @@
 
 #include "Game.h"
 
+#include <iostream>
+
 
 int main(void)
 {
+	int maxCardValue, numSuits, numPlayers;
 
-	Game* currentGame = new Game(4, 1, 2);
+	std::cout << "Set maximum card value: ";
+	std::cin >> maxCardValue;
+
+	std::cout << "Set number of suits: ";
+	std::cin >> numSuits;
+
+	std::cout << "Set number of players: ";
+	std::cin >> numPlayers;
+
+	Game* currentGame = new Game(maxCardValue, numSuits, numPlayers);
 
 	while (currentGame->GetGameState() != GameStates::EXIT)
 	{
