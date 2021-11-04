@@ -3,6 +3,7 @@
 
 #include <iostream>
 
+#define SMART
 
 int main(void)
 {
@@ -17,7 +18,11 @@ int main(void)
 	std::cout << "Set number of players: ";
 	std::cin >> numPlayers;
 
+#ifdef SMART
+	Game* currentGame = new Game(maxCardValue, numSuits, numPlayers, true);
+#else
 	Game* currentGame = new Game(maxCardValue, numSuits, numPlayers);
+#endif
 
 	while (currentGame->GetGameState() != GameStates::EXIT)
 	{
@@ -25,12 +30,21 @@ int main(void)
 		{
 			case GameStates::PLAYING:
 			{
+#ifdef SMART
+				currentGame->PlayRoundSmart();
+#else
 				currentGame->PlayRound();
+#endif
 				break;
 			}
 			case GameStates::SCORING:
 			{
+#ifdef SMART
+				currentGame->ScoreGameSmart();
+#else
 				currentGame->ScoreGame();
+#endif
+				
 				break;
 			}
 		}
